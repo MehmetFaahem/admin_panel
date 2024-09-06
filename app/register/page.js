@@ -61,7 +61,9 @@ export default function RegisterPage() {
         {formik.touched.password && formik.errors.password ? (
           <div className="text-red-500 text-sm">{formik.errors.password}</div>
         ) : null}
-        <Button type="submit">Register</Button>
+        <div className="flex justify-center">
+          <Button type="submit">Register</Button>
+        </div>
       </form>
     </div>
   );
