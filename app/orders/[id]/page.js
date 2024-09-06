@@ -42,7 +42,16 @@ export default function AdminOrderDetail() {
   if (loading) {
     return (
       <AdminLayout>
-        <Skeleton className="h-[300px] w-full" />
+        <Card>
+          <CardContent>
+            <div className="space-y-4">
+              <Skeleton className="h-8 w-1/2" />
+              <Skeleton className="h-6 w-1/3" />
+              <Skeleton className="h-6 w-1/4" />
+              <Skeleton className="h-6 w-1/5" />
+            </div>
+          </CardContent>
+        </Card>
       </AdminLayout>
     );
   }
