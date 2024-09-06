@@ -9,6 +9,8 @@ This project is a comprehensive admin panel built using Next.js, designed to man
 - **Next.js**: A powerful React framework for building server-side rendered and statically generated web applications.
 - **React**: A JavaScript library for building user interfaces.
 - **Axios**: A promise-based HTTP client for making API requests.
+- **Chart.js**: A simple yet flexible JavaScript library for building charts.
+- **React-chartjs-2**: A library for building charts in React, providing a simple way to handle form state and validation.
 - **Formik**: A library for building forms in React, providing a simple way to handle form state and validation.
 - **Yup**: A JavaScript schema builder for value parsing and validation, used in conjunction with Formik.
 - **Radix UI**: A set of low-level, accessible UI components for building high-quality design systems and web applications.
