@@ -9,6 +9,25 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Bar } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 export default function AdminDashboard() {
   const [totals, setTotals] = useState({
@@ -25,7 +44,7 @@ export default function AdminDashboard() {
         const response = await axios.get("/api/data");
 
         const data = response.data;
-        const totalSales = 1000;
+        const totalSales = 4;
         const totalProducts = data.products?.length || 0;
         const totalCustomers = data.customers?.length || 0;
         const totalOrders = data.orders?.length || 0;
@@ -46,6 +65,42 @@ export default function AdminDashboard() {
     fetchData();
   }, []);
 
+  const chartData = {
+    labels: [
+      "Total Sales",
+      "Total Products",
+      "Total Customers",
+      "Total Orders",
+    ],
+    datasets: [
+      {
+        label: "Totals",
+        data: [
+          totals.totalSales,
+          totals.totalProducts,
+          totals.totalCustomers,
+          totals.totalOrders,
+        ],
+        backgroundColor: "rgba(75, 192, 192, 0.6)",
+        borderColor: "rgba(75, 192, 192, 1)",
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  const chartOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: true,
+        text: "Admin Dashboard Totals",
+      },
+    },
+  };
+
   return (
     <AdminLayout>
       <h1 className="text-2xl font-bold mb-6">Admin Dashboard</h1>
@@ -56,7 +111,7 @@ export default function AdminDashboard() {
             {loading ? (
               <Skeleton className="h-6 w-24" />
             ) : (
-              <CardDescription>৳{totals.totalSales}</CardDescription>
+              <CardDescription>৳ {totals.totalSales}</CardDescription>
             )}
           </CardContent>
         </Card>
@@ -90,6 +145,14 @@ export default function AdminDashboard() {
             )}
           </CardContent>
         </Card>
+      </div>
+      <div className="mt-8">
+        <h2 className="text-xl font-bold mb-4">Sales Overview</h2>
+        {loading ? (
+          <Skeleton className="h-64 w-full" />
+        ) : (
+          <Bar data={chartData} options={chartOptions} />
+        )}
       </div>
     </AdminLayout>
   );
